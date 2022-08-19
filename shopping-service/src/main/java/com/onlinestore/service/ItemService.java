@@ -1,6 +1,5 @@
 package com.onlinestore.service;
 
-import com.backendtest.shoppingservice.dto.*;
 import com.onlinestore.dto.*;
 
 import java.util.*;

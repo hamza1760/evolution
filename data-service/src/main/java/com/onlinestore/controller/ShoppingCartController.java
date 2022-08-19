@@ -1,5 +1,6 @@
 package com.onlinestore.controller;
 
+import com.onlinestore.apiresponse.*;
 import com.onlinestore.dto.*;
 import com.onlinestore.service.*;
 import org.springframework.beans.factory.annotation.*;
@@ -24,14 +25,19 @@ public class ShoppingCartController {
         return shoppingCartService.viewCartList();
     }
 
-    @DeleteMapping("/cart/{cartId}/empty")
-    public ShoppingCartDTO removeAllItemsFromCart(@PathVariable int cartId) {
-        return shoppingCartService.removeAllItemsFromCart(cartId);
+    @GetMapping("/cart/{cartId}")
+    public ShoppingCartDTO findShoppingCart(@PathVariable int cartId){
+        return shoppingCartService.findShoppingCart(cartId);
+    }
+
+    @GetMapping("/cart/save")
+    public ShoppingCartDTO saveShoppingCart(@RequestBody ShoppingCartDTO cartDTO){
+        return shoppingCartService.saveShoppingCart(cartDTO);
     }
 
     @DeleteMapping("/cart/{cartId}")
-    public ResponseEntity<?> deleteShoppingCartById(@PathVariable int cartId) {
-        shoppingCartService.deleteShoppingCartById(cartId);
-        return new ResponseEntity<>("ShoppingCart Deleted", HttpStatus.OK);
+    public ResponseEntity<?> deleteShoppingCart(@PathVariable int cartId){
+        shoppingCartService.deleteShoppingCart(cartId);
+        return new ResponseEntity<>(new ApiResponse("Cart Deleted",cartId),HttpStatus.OK);
     }
 }

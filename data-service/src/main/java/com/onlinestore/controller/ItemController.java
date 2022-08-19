@@ -1,6 +1,8 @@
 package com.onlinestore.controller;
 
+import com.onlinestore.apiresponse.*;
 import com.onlinestore.dto.*;
+import com.onlinestore.entity.*;
 import com.onlinestore.service.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
@@ -24,27 +26,19 @@ public class ItemController {
         return itemService.addItem(itemDTO);
     }
 
-    @PostMapping("/item/cart/{cartId}")
-    public ResponseEntity<?> addItemToCart(@RequestBody ItemDTO itemDTO, @PathVariable int cartId) {
-        itemService.addItemToCart(itemDTO, cartId);
-        return new ResponseEntity<>("Item added to cart with cartId:" + " cartId", HttpStatus.OK);
-    }
+   @GetMapping("/item/{itemId}")
+   public ItemDTO findItem(@PathVariable int itemId){
+        return itemService.findItem(itemId);
+   }
 
-    @PutMapping("/item/{itemId}")
-    public ResponseEntity<?> updateItemInCart(@RequestBody ItemDTO itemDTO, @PathVariable int itemId) {
-        itemService.updateItemInCart(itemDTO, itemId);
-        return new ResponseEntity<>("Item updated", HttpStatus.OK);
-    }
+   @GetMapping("/item/save")
+        public ItemDTO saveItem(@RequestBody ItemDTO itemDTO){
+        return itemService.saveItem(itemDTO);
+   }
 
-    @DeleteMapping("item/{itemId}/remove")
-    public ResponseEntity<?> removeItemFromCart(@PathVariable int itemId) {
-        itemService.removeItemFromCart(itemId);
-        return new ResponseEntity<>("Item removed from cart", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/item/{itemId}")
-    public ResponseEntity<?> deleteItemById(@PathVariable int itemId) {
-        itemService.deleteItemById(itemId);
-        return new ResponseEntity<>("Item Deleted", HttpStatus.OK);
-    }
+   @DeleteMapping("/item/{itemId}")
+    public ResponseEntity<?> deleteItem(@PathVariable int itemId){
+        itemService.deleteItem(itemId);
+        return new ResponseEntity<>(new ApiResponse("Item Deleted",itemId),HttpStatus.OK);
+   }
 }

@@ -10,11 +10,9 @@ public interface ItemService {
 
     ItemDTO addItem(ItemDTO itemDTO);
 
-    void addItemToCart(ItemDTO itemDTO,int cartId);
+    ItemDTO findItem(int itemId);
 
-    void updateItemInCart(ItemDTO itemDTO, int itemId);
+    ItemDTO saveItem(ItemDTO itemDTO);
 
-    void removeItemFromCart(int itemId);
-
-    void deleteItemById(int itemId);
+    void deleteItem(int itemId);
 }

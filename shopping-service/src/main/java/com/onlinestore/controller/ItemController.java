@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.*;
 import java.util.*;
 
 @RestController
@@ -20,14 +21,13 @@ public class ItemController {
     }
 
     @PostMapping("/item")
-    public ItemDTO addItem(@RequestBody ItemDTO itemDTO) {
+    public ItemDTO addItem(@Valid @RequestBody ItemDTO itemDTO) {
         return itemService.addItem(itemDTO);
     }
-
     @PostMapping("/item/cart/{cartId}")
-    public ResponseEntity<?> addItemToCart(@RequestBody ItemDTO itemDTO, @PathVariable int cartId) {
-        itemService.addItemToCart(itemDTO, cartId);
-        return new ResponseEntity<>("Item added to cart with cartId:" + " cartId", HttpStatus.OK);
+    public ResponseEntity<?> addItemToCart(@RequestBody ItemDTO itemDTO,@PathVariable int cartId){
+        itemService.addItemToCart(itemDTO,cartId);
+        return new ResponseEntity<>("Item added to cart with cartId:" +" cartId",HttpStatus.OK);
     }
 
     @PutMapping("/item/{itemId}")

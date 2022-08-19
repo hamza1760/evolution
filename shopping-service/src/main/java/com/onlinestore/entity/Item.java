@@ -3,6 +3,7 @@ package com.onlinestore.entity;
 import com.onlinestore.constant.*;
 import org.hibernate.annotations.*;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 
 @Entity

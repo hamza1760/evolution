@@ -6,11 +6,13 @@ import java.util.*;
 
 public interface ShoppingCartService {
 
+    List<ShoppingCartDTO> viewCartList();
+    
     ShoppingCartDTO addCart(ShoppingCartDTO shoppingCartDTO);
 
-    List<ShoppingCartDTO> viewCartList();
+    ShoppingCartDTO findShoppingCart(int shoppingCartId);
 
-    void deleteShoppingCartById(int cartId);
+    ShoppingCartDTO saveShoppingCart(ShoppingCartDTO shoppingCartDTO);
 
-    ShoppingCartDTO removeAllItemsFromCart(int cartId);
+    void deleteShoppingCart(int shoppingCartId);
 }

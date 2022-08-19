@@ -3,17 +3,15 @@ package com.onlinestore.dto;
 import com.fasterxml.jackson.annotation.*;
 import com.onlinestore.constant.*;
 
+import javax.validation.constraints.*;
+
 public class ItemDTO {
 
     private int itemId;
     private int quantity;
-
     private long upc;
-
     private String color;
-
     private double price;
-
     private double discount;
     @JsonIgnore
     private String status = Constants.ACTIVE.getValue();

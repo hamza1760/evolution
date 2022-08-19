@@ -4,6 +4,7 @@ import com.onlinestore.client.*;
 import com.onlinestore.constant.*;
 import com.onlinestore.dto.*;
 import com.onlinestore.entity.*;
+import com.onlinestore.exception.Exception;
 import com.onlinestore.mapper.*;
 import com.onlinestore.repository.*;
 import org.springframework.beans.factory.annotation.*;
@@ -15,24 +16,24 @@ import java.util.stream.*;
 @Service
 public class ItemServiceImpl implements ItemService {
 
+   @Autowired
+    DataService dataService;
 
-    @Autowired
-    private DataService dataService;
 
     @Override
     public List<ItemDTO> getItemList() {
-       return dataService.getItemList();
+        return dataService.getItemList();
+
     }
 
     @Override
     public ItemDTO addItem(ItemDTO itemDTO) {
-        itemDTO = dataService.addItem(itemDTO);
-        return itemDTO;
+        return dataService.addItem(itemDTO);
     }
 
     @Override
     public void addItemToCart(ItemDTO itemDTO, int cartId) {
-        Item item = itemRepository.findByStatusAndItemId(Constants.ACTIVE.getValue(), itemDTO.getItemId());
+        ItemDTO item = dataService.findItem(itemDTO.getItemId());
         if (item == null) {
             throw new Exception(Constants.ITEM_NOT_FOUND.getValue(), itemDTO.getItemId());
         }
