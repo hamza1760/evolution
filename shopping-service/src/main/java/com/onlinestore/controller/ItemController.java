@@ -1,12 +1,14 @@
 package com.onlinestore.controller;
 
+import com.onlinestore.constant.*;
 import com.onlinestore.dto.*;
+import com.onlinestore.exception.Exception;
 import com.onlinestore.service.*;
+import feign.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.*;
 import java.util.*;
 
 @RestController
@@ -21,15 +23,15 @@ public class ItemController {
     }
 
     @PostMapping("/item")
-    public ItemDTO addItem(@Valid @RequestBody ItemDTO itemDTO) {
+    public ItemDTO addItem(@RequestBody ItemDTO itemDTO) {
         return itemService.addItem(itemDTO);
     }
-    @PostMapping("/item/cart/{cartId}")
-    public ResponseEntity<?> addItemToCart(@RequestBody ItemDTO itemDTO,@PathVariable int cartId){
-        itemService.addItemToCart(itemDTO,cartId);
-        return new ResponseEntity<>("Item added to cart with cartId:" +" cartId",HttpStatus.OK);
-    }
 
+    @PostMapping("/item/cart/{cartId}")
+    public ResponseEntity<?> addItemToCart(@RequestBody ItemDTO itemDTO, @PathVariable int cartId) {
+        itemService.addItemToCart(itemDTO, cartId);
+        return new ResponseEntity<>("Item added to cart with cartId:" + " cartId", HttpStatus.OK);
+    }
     @PutMapping("/item/{itemId}")
     public ResponseEntity<?> updateItemInCart(@RequestBody ItemDTO itemDTO, @PathVariable int itemId) {
         itemService.updateItemInCart(itemDTO, itemId);

@@ -9,4 +9,16 @@ public class Exception extends RuntimeException {
         this.message = message;
         this.id = id;
     }
+
+    public Exception() {
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

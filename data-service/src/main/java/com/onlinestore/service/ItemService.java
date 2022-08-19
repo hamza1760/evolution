@@ -12,7 +12,5 @@ public interface ItemService {
 
     ItemDTO findItem(int itemId);
 
-    ItemDTO saveItem(ItemDTO itemDTO);
-
     void deleteItem(int itemId);
 }

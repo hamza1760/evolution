@@ -3,7 +3,6 @@ package com.onlinestore.dto;
 import com.fasterxml.jackson.annotation.*;
 import com.onlinestore.constant.*;
 
-import javax.validation.constraints.*;
 import java.util.*;
 
 public class ShoppingCartDTO {

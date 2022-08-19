@@ -12,7 +12,6 @@ public interface ShoppingCartService {
 
     ShoppingCartDTO findShoppingCart(int shoppingCartId);
 
-    ShoppingCartDTO saveShoppingCart(ShoppingCartDTO shoppingCartDTO);
 
     void deleteShoppingCart(int shoppingCartId);
 }

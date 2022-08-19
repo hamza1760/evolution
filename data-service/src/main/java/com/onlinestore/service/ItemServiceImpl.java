@@ -39,17 +39,18 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemDTO findItem(int itemId) {
         Item item = itemRepository.findByStatusAndItemId(Constants.ACTIVE.getValue(), itemId);
-        return globalMapper.itemToItemDTO(item);
-    }
-
-    @Override
-    public ItemDTO saveItem(ItemDTO itemDTO) {
-        Item item = itemRepository.save(globalMapper.itemDTOToItem(itemDTO));
+        if (item == null) {
+            return null;
+        }
         return globalMapper.itemToItemDTO(item);
     }
 
     @Override
     public void deleteItem(int itemId) {
+        Item item = itemRepository.findByStatusAndItemId(Constants.ACTIVE.getValue(), itemId);
+        if (item == null) {
+
+        }
         itemRepository.delete(Constants.DELETED.getValue(), itemId);
     }
 }

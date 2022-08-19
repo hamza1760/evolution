@@ -31,11 +31,6 @@ public class ItemController {
         return itemService.findItem(itemId);
    }
 
-   @GetMapping("/item/save")
-        public ItemDTO saveItem(@RequestBody ItemDTO itemDTO){
-        return itemService.saveItem(itemDTO);
-   }
-
    @DeleteMapping("/item/{itemId}")
     public ResponseEntity<?> deleteItem(@PathVariable int itemId){
         itemService.deleteItem(itemId);

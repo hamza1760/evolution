@@ -1,6 +1,7 @@
 package com.onlinestore.service;
 
 import com.onlinestore.dto.*;
+import org.springframework.http.*;
 
 import java.util.*;
 
@@ -10,7 +11,7 @@ public interface ItemService {
 
     ItemDTO addItem(ItemDTO itemDTO);
 
-    void addItemToCart(ItemDTO itemDTO,int cartId);
+    void addItemToCart(ItemDTO itemDTO, int cartId);
 
     void updateItemInCart(ItemDTO itemDTO, int itemId);
 
