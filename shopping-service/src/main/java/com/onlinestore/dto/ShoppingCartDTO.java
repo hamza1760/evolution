@@ -76,15 +76,4 @@ public class ShoppingCartDTO {
         this.itemList = itemList;
     }
 
-    @Override
-    public String toString() {
-        return "ShoppingCartDTO{" +
-                "cartId=" + cartId +
-                ", itemCount=" + itemCount +
-                ", grandTotal=" + grandTotal +
-                ", totalDiscount=" + totalDiscount +
-                ", status='" + status + '\'' +
-                ", itemList=" + itemList +
-                '}';
-    }
 }

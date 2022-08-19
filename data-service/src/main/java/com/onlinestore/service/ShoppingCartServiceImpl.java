@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -22,7 +23,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public List<ShoppingCartDTO> viewCartList() {
-        return null;
+        List<ShoppingCart> shoppingCart = shoppingCartRepository.findByStatus(Constants.ACTIVE.getValue());
+        return shoppingCart.stream().map(globalMapper::shoppingCartToShoppingCartDTO).collect(Collectors.toList());
     }
 
     @Override

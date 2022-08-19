@@ -96,17 +96,4 @@ public class ItemDTO {
         this.cart = cart;
     }
 
-    @Override
-    public String toString() {
-        return "ItemDTO{" +
-                "itemId=" + itemId +
-                ", quantity=" + quantity +
-                ", upc=" + upc +
-                ", color='" + color + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", status='" + status + '\'' +
-                ", cart=" + cart +
-                '}';
-    }
 }

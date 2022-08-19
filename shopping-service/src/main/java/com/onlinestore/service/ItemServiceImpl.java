@@ -38,12 +38,13 @@ public class ItemServiceImpl implements ItemService {
         }
         shoppingCartDTO.setItemCount(shoppingCartDTO.getItemCount() + 1);
         List<ItemDTO> itemListDTO = shoppingCartDTO.getItemList();
+
         itemListDTO.add(itemDTO);
         itemDTO.setQuantity(item.getQuantity() + 1);
         shoppingCartDTO.setGrandTotal(shoppingCartDTO.getGrandTotal() + (itemDTO.getPrice() * 1));
         shoppingCartDTO.setTotalDiscount(shoppingCartDTO.getTotalDiscount() + (itemDTO.getDiscount() * 1));
         shoppingCartDTO.setItemList(itemListDTO);
-        dataService.addCart(shoppingCartDTO);
+       dataService.addCart(shoppingCartDTO);
         itemDTO.setCart(shoppingCartDTO);
         dataService.addItem(itemDTO);
     }

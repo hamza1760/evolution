@@ -3,7 +3,6 @@ package com.onlinestore.service;
 import com.onlinestore.constant.*;
 import com.onlinestore.dto.*;
 import com.onlinestore.entity.*;
-import com.onlinestore.exception.Exception;
 import com.onlinestore.mapper.*;
 import com.onlinestore.repository.*;
 import org.springframework.beans.factory.annotation.*;
@@ -19,9 +18,6 @@ public class ItemServiceImpl implements ItemService {
     ItemRepository itemRepository;
 
     @Autowired
-    ShoppingCartRepository shoppingCartRepository;
-
-    @Autowired
     GlobalMapper globalMapper;
 
     @Override
@@ -33,6 +29,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemDTO addItem(ItemDTO itemDTO) {
         Item item = itemRepository.save(globalMapper.itemDTOToItem(itemDTO));
+        System.out.println(item);
         return globalMapper.itemToItemDTO(item);
     }
 
@@ -49,7 +46,6 @@ public class ItemServiceImpl implements ItemService {
     public void deleteItem(int itemId) {
         Item item = itemRepository.findByStatusAndItemId(Constants.ACTIVE.getValue(), itemId);
         if (item == null) {
-
         }
         itemRepository.delete(Constants.DELETED.getValue(), itemId);
     }
