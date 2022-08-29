@@ -17,7 +17,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCartDTO addCart(ShoppingCartDTO shoppingCartDTO) {
-        return dataService.addCart(shoppingCartDTO);
+        return dataService.saveCart(shoppingCartDTO);
     }
 
     @Override
@@ -38,10 +38,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         itemListDTO.forEach(itemDTO -> {
             itemDTO.setQuantity(0);
             itemDTO.setCart(null);
-            dataService.addItem(itemDTO);
+            dataService.saveItem(itemDTO);
         });
         shoppingCartDTO.setItemList(null);
-        shoppingCartDTO = dataService.addCart(shoppingCartDTO);
+        shoppingCartDTO = dataService.saveCart(shoppingCartDTO);
         return shoppingCartDTO;
     }
 

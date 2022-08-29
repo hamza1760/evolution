@@ -23,7 +23,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDTO addItem(ItemDTO itemDTO) {
-        return dataService.addItem(itemDTO);
+        return dataService.saveItem(itemDTO);
     }
 
     @Override
@@ -43,10 +43,8 @@ public class ItemServiceImpl implements ItemService {
         itemDTO.setQuantity(item.getQuantity() + 1);
         shoppingCartDTO.setGrandTotal(shoppingCartDTO.getGrandTotal() + (itemDTO.getPrice() * 1));
         shoppingCartDTO.setTotalDiscount(shoppingCartDTO.getTotalDiscount() + (itemDTO.getDiscount() * 1));
-        shoppingCartDTO.setItemList(itemListDTO);
-       dataService.addCart(shoppingCartDTO);
-        itemDTO.setCart(shoppingCartDTO);
-        dataService.addItem(itemDTO);
+       dataService.saveCart(shoppingCartDTO);
+        dataService.addItemToCart(itemDTO,cartId);
     }
 
     @Override
@@ -62,11 +60,10 @@ public class ItemServiceImpl implements ItemService {
                 if (itemDTO.getItemId() == itemId) {
                     shoppingCartDTO.setGrandTotal(shoppingCartDTO.getGrandTotal() - (itemInCart.getPrice() * itemInCart.getQuantity()));
                     shoppingCartDTO.setTotalDiscount(shoppingCartDTO.getTotalDiscount() - (itemInCart.getDiscount() * itemInCart.getQuantity()));
-                    itemDTO.setCart(shoppingCartDTO);
                     shoppingCartDTO.setGrandTotal(shoppingCartDTO.getGrandTotal() + (itemDTO.getPrice() * itemDTO.getQuantity()));
                     shoppingCartDTO.setTotalDiscount(shoppingCartDTO.getTotalDiscount() + (itemDTO.getDiscount() * itemDTO.getQuantity()));
-                    dataService.addCart(shoppingCartDTO);
-                    dataService.addItem(itemDTO);
+                    dataService.saveCart(shoppingCartDTO);
+                    dataService.addItemToCart(itemDTO,shoppingCartDTO.getCartId());
                 } else {
                     throw new Exception("Cannot update item id", itemDTO.getItemId());
                 }
@@ -88,16 +85,16 @@ public class ItemServiceImpl implements ItemService {
                 if (itemInCart.getQuantity() != 0) {
                     shoppingCartDTO.setGrandTotal(shoppingCartDTO.getGrandTotal() - (itemInCart.getPrice() * 1));
                     shoppingCartDTO.setTotalDiscount(shoppingCartDTO.getTotalDiscount() - (itemInCart.getDiscount() * 1));
-                    dataService.addItem(itemInCart);
+                    dataService.saveItem(itemInCart);
                     shoppingCartDTO.setItemList(itemList.stream().filter((items) -> items.getItemId() != itemId).collect(Collectors.toList()));
-                    dataService.addCart(shoppingCartDTO);
+                    dataService.saveCart(shoppingCartDTO);
                 } else {
                     shoppingCartDTO.setGrandTotal(shoppingCartDTO.getGrandTotal() - (itemInCart.getPrice() * 1));
                     shoppingCartDTO.setTotalDiscount(shoppingCartDTO.getTotalDiscount() - (itemInCart.getDiscount() * 1));
                     itemInCart.setCart(null);
-                    dataService.addItem(itemInCart);
+                    dataService.saveItem(itemInCart);
                     shoppingCartDTO.setItemList(itemList.stream().filter((items) -> items.getItemId() != itemId).collect(Collectors.toList()));
-                    dataService.addCart(shoppingCartDTO);
+                    dataService.saveCart(shoppingCartDTO);
                 }
             }
         });

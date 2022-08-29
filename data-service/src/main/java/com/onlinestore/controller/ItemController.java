@@ -22,8 +22,13 @@ public class ItemController {
     }
 
     @PostMapping("/item")
-    public ItemDTO addItem(@RequestBody ItemDTO itemDTO) {
-        return itemService.addItem(itemDTO);
+    public ItemDTO saveItem(@RequestBody ItemDTO itemDTO) {
+        return itemService.saveItem(itemDTO);
+    }
+
+    @PostMapping("/item/{cartId}")
+    public ItemDTO addItemToCart(@RequestBody ItemDTO itemDTO,@PathVariable int cartId) {
+        return itemService.addItemToCart(itemDTO,cartId);
     }
 
    @GetMapping("/item/{itemId}")

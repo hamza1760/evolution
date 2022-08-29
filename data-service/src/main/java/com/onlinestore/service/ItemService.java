@@ -8,7 +8,9 @@ public interface ItemService {
 
     List<ItemDTO> getItemList();
 
-    ItemDTO addItem(ItemDTO itemDTO);
+    ItemDTO saveItem(ItemDTO itemDTO);
+
+    ItemDTO addItemToCart(ItemDTO itemDTO,int cartId);
 
     ItemDTO findItem(int itemId);
 

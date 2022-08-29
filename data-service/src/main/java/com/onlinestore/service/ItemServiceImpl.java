@@ -16,6 +16,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     ItemRepository itemRepository;
+    @Autowired
+    ShoppingCartRepository shoppingCartRepository;
 
     @Autowired
     GlobalMapper globalMapper;
@@ -27,9 +29,15 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDTO addItem(ItemDTO itemDTO) {
+    public ItemDTO saveItem(ItemDTO itemDTO) {
         Item item = itemRepository.save(globalMapper.itemDTOToItem(itemDTO));
-        System.out.println(item);
+        return globalMapper.itemToItemDTO(item);
+    }
+    @Override
+    public ItemDTO addItemToCart(ItemDTO itemDTO,int cartId) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findByStatusAndCartId(Constants.ACTIVE.getValue(), cartId);
+        itemDTO.setCart(globalMapper.shoppingCartToShoppingCartDTO(shoppingCart));
+        Item item = itemRepository.save(globalMapper.itemDTOToItem(itemDTO));
         return globalMapper.itemToItemDTO(item);
     }
 
